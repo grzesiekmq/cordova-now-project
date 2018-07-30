@@ -1,0 +1,39 @@
+﻿<div ng-controller="DetailsCtrl as dc">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-0"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+            <div class="alert alert-success text-center">
+                <h4>Wybrany cel: </h4>
+                <h3>{{ target}} </h3>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-0"></div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+
+            <div class="alert alert-info text-center">
+                <h3>Czas podróży: </h3>
+                <i class="fa fa-clock-o fa-5x"></i>
+                <br>
+                <strong>   {{ distVal}} </strong>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+
+            <div class="alert alert-info text-center">
+                <h3>Odległość: </h3>
+                <i class="fa fa-road fa-5x"></i>
+                <br>
+                {{ dist}}
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>

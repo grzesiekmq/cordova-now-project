@@ -1,0 +1,19 @@
+		//Odległość 
+				var svcDM = new google.maps.DistanceMatrixService;
+
+                            svcDM.getDistanceMatrix({
+                                origins: [loc],
+                                destinations: [taxiPos],
+                                travelMode: 'WALKING',
+                                unitSystem: google.maps.UnitSystem.METRIC
+                            }, function(response) {
+                                $scope.nearTaxi = response.destinationAddresses["0"];
+                                if (response.rows[0].elements[0].distance.value > 999) {
+                                    $scope.dist = response.rows["0"].elements["0"].distance.text;
+                                } else {
+                                    $scope.dist = response.rows[0].elements[0].distance.value + 'm';
+                                }
+                                $scope.distVal = response.rows["0"].elements["0"].duration.text;
+                                $scope.$apply();
+	document.getElementById("map_title").innerHTML = "Wskaż swoją pozycje na mapie: ";
+	document.getElementById("map_panel").className = "hidden";

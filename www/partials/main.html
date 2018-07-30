@@ -1,0 +1,49 @@
+<h5> Witaj w now!</h5>
+<p></p>
+Wyszukaj wszystkie dostępne miejsca w okolicy lub wybierz z menu interesujący Cię profil.
+<hr/>
+<a href="#/eat">
+    <ons-button modifier="large"> Jedzenie</ons-button>
+</a>
+<a href="#/buy">
+    <ons-button modifier="large"> Zakupy</ons-button>
+</a>
+<a href="#/taxi">
+    <ons-button modifier="large"> Taxi</ons-button>
+</a>
+<div class="" ng-if='res.length > 0'>
+    <div class="">Wszystkie miejsca w okolicy:</div>
+    <div class="">
+        <table class="">
+            <tbody>
+                <tr ng-repeat="r in res">
+                    <td>
+                        <div ng-repeat="type in r.types">
+                            <i class="fa fa-bed" aria-hidden="true" ng-show="type == 'lodging'" ;> Nocleg</i>
+                            <i class="fa fa-spoon" aria-hidden="true" ng-show="type == 'food'" ;> Fast food</i>
+                            <i class="fa fa-beer" aria-hidden="true" ng-show="type == 'bar'" ;> Bar</i>
+                            <i class="fa fa-cutlery" aria-hidden="true" ng-show="type == 'restaurant'" ;> Restauracja</i>
+                            <i class="fa fa-heartbeat" aria-hidden="true" ng-show="type == 'gym'" ;> Siłownia</i>
+                            <i class="fa fa-medkit" aria-hidden="true" ng-show="type == 'health'" ;> Zdrowie</i>
+                            <i class="fa fa-film" aria-hidden="true" ng-show="type == 'movie_theater'" ;> Kino</i>
+                            <i class="fa fa-diamond" aria-hidden="true" ng-show="type == 'point_of_interest'" ;> Ciekawe miejsce</i>
+                            <i class="fa fa-coffee" aria-hidden="true" ng-show="type == 'cafe'" ;> Kawiarnia</i>
+                            <i class="fa fa-shopping-basket" aria-hidden="true" ng-show="type == 'store'" ;> Sklep</i>
+                            <i class="fa fa-car" aria-hidden="true" ng-show="type == 'parking'" ;> Parking</i>
+                            <i class="fa fa-shopping-cart" aria-hidden="true" ng-show="type == 'grocery_or_supermarket'" ;> Supermarket</i>
+                            <i class="fa fa-glass" aria-hidden="true" ng-show="type == 'night_club'" ;> Klub nocny</i>
+                        </div>
+                    </td>
+                    <td ng-bind="r.name"></td>
+                    <td class="link">
+                        <a ng-href="#/details/{{loc.lat()}}/{{loc.lng()}}/{{r.geometry.location.lat()}}/{{r.geometry.location.lng()}}/{{r.name}}" class="btn btn-success btn-xs ">NAWIGUJ <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="">
+        Twoja lokalizacja: "{{loc.lat()}}, {{loc.lng()}}"
+    </div>
+</div>

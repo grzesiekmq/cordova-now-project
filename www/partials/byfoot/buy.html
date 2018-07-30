@@ -1,0 +1,66 @@
+          <ons-toolbar>
+
+          <ons-back-button></ons-back-button>
+      </ons-toolbar>
+<div>
+    <div class="">
+        <div class="">
+        </div>
+        <div class="">
+
+            <div class="">
+                <div class="">
+                    Wybrany profil:
+
+                </div>
+                <div class="">
+                    <i class="fa fa-shopping-cart fa-5x"></i>
+                    <h3>Zakupy </h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="" ng-if='res.length > 0'>
+        <div class="">Najbliższe sklepy: </div>
+        <div class="">
+            <table class="">
+                <thead>
+                    <tr>
+                        <th>*</th>
+                        <th>Nazwa</th>
+                        <th>Adres</th>
+                        <th>Ocena</th>
+                        <th>*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="r in res" >
+                        <td>
+                            <div ng-if="r.opening_hours.open_now == true">
+                                <span class="label label-success">OTWARTE</span>
+                            </div>
+                            <div ng-if=""r.opening_hours.open_now == false">
+                                 <span class="label label-warning">ZAMKNIĘTE</span>
+                            </div>
+                        </td>
+                        <td>{{r.name}}</td>
+                        <td>{{r.vicinity}}</td>
+
+                        <td>{{r.rating}}</td>
+                        <td class="link"><a href="#/details/{{loc.lat()}}/{{loc.lng()}}/{{r.geometry.location.lat()}}/{{r.geometry.location.lng()}}/{{r.name}}" class="btn btn-success btn-xs ">NAWIGUJ <i class="fa fa-arrow-right" aria-hidden="true"></i></a></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="">Znaleziono: {{ res.length}}</div>
+    </div>
+
+    
+    
+
+</div>
+
+

@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Samochodem</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a class="btn btn-primary btn-lg btn-block" href="#/" id="allOne">
+                        <div class="row"><span class="glyphicon glyphicon-home"></span></div>
+                        <div class="row"><span class="all">wszystkie</span></div>
+                        <div class="row"><span class="all">powiadomienia</span></div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a class="btn btn-primary btn-lg btn-block" href="#/pieszo" role="button" id="btnfoot">
+                        <div class="row"><img src=".\img\byfoot.png" id="bfoot"></div>
+                        <div class="row"><span>pieszo</span></div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a class="btn btn-default btn-lg btn-block" href="#/drive">
+                        <div class="row"><img src=".\img\drive.png" id="img-car"></div><span id="car">samochodem</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Lista salonów samochodowych::</div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover ">
+                <tbody>
+                    <tr ng-repeat="r in res">
+                        <td>{{r.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Lista samochodów w salonie</div>
+        <div class="panel-body">
+            <div class="row" ng-repeat="car in cars">
+                <div class="col-xs-6"><img class="img-responsive" ng-src="{{car.img}}"></div>
+                <hr class="hr-custom">
+                <div class="col-xs-6">
+                    <h4 class="names">{{car.name}}</h4>
+                </div>
+            </div>
+            <h4 class="list" ng-repeat="x in carItem">{{x}}</h4>
+        </div>
+    </div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">
+				Samochodem
+			</h4>
+		  </div>
+		  <div class="modal-body">
+			<p>
+				Wybrałeś kategorie samochód. Po wybraniu swojej pozycji na mapie zostanie wyśwetlona lista salonów samochodowych wraz z lokalizacjami. 
+			</p>
+			<p>
+				Dodatkowo możesz wczytać lub usunąć listę wybranych przez siebie samochodów.
+			</p>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
+		 
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>

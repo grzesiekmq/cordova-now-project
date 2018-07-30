@@ -1,0 +1,52 @@
+<div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-0">
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+            <div class="panel panel-primary text-center no-boder bg-color-blue">
+                <div class="panel-footer back-footer-blue">
+                    Wybrany profil:
+
+                </div>
+                <div class="panel-body">
+                    <i class="fa fa-taxi fa-5x"></i>
+                    <h3>Taxi </h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div ng-if='res.length > 0'>
+        <div class="panel panel-default" >
+            <div class="panel-heading">Najbliższe postoje taksówek:</div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover ">
+                    <tbody>
+                        <tr ng-repeat="r in res">
+                            <td>{{r.name}}</td>
+
+                            <td class="link"><a href="#/details/{{loc.lat()}}/{{loc.lng()}}/{{r.geometry.location.lat()}}/{{r.geometry.location.lng()}}/{{r.name}}" class="btn btn-success btn-xs ">NAWIGUJ <i class="fa fa-arrow-right" aria-hidden="true"></i></a></td>
+
+							
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Najbliższa taksówka znajduje się na ulicy:</strong><br>
+            {{nearTaxi}}<br>
+            <strong>Dystans wynosi:</strong> <br>
+            {{dist}}<br>
+            <span class="label label-info">Pieszo: {{distVal}}</span>
+        </div>
+    </div>
+
+
+    
+    
+
+</div>
