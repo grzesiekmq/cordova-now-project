@@ -2,15 +2,20 @@
 <p></p>
 Wyszukaj wszystkie dostępne miejsca w okolicy lub wybierz z menu interesujący Cię profil.
 <hr/>
-<a href="#/eat">
-    <ons-button modifier="large"> Jedzenie</ons-button>
-</a>
-<a href="#/buy">
-    <ons-button modifier="large"> Zakupy</ons-button>
-</a>
-<a href="#/taxi">
-    <ons-button modifier="large"> Taxi</ons-button>
-</a>
+<div class="btn-container">
+
+        <ons-button modifier="large" ng-click="nc.allPlaces()"> Wszystkie miejsca</ons-button>
+    
+    <a href="#/eat">
+        <ons-button modifier="large"> Jedzenie</ons-button>
+    </a>
+    <a href="#/buy">
+        <ons-button modifier="large"> Zakupy</ons-button>
+    </a>
+    <a href="#/taxi">
+        <ons-button modifier="large"> Taxi</ons-button>
+    </a>
+</div>
 <div class="" ng-if='res.length > 0'>
     <div class="">Wszystkie miejsca w okolicy:</div>
     <div class="">

@@ -6,9 +6,12 @@ h1 {
     padding:0;
     text-align:center;
 }
+.btn-container{
+	line-height: 3em;
+}
 
 #map {
     width: 90%;
     height: 14.2em;
-    margin: auto;
+    margin: 0 auto;
 }

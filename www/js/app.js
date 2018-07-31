@@ -21,7 +21,8 @@ var eatOptions = {
     controllerAs: 'ec'
 
 };
-var routeProvider = function($routeProvider) {
+
+function routeProvider($routeProvider) {
     $routeProvider.when('/', mainOptions)
         .when('/buy', buyOptions)
         .when('/taxi', taxiOptions)

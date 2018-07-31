@@ -1,17 +1,15 @@
-function NowCtrl($http, $scope, $window) {
+function NowCtrl($scope, $window) {
+    "use strict";
     var nc = this;
-    var lat, lng;
-    function success(position){
-        lat = position.coords.latitude;
-        lng = position.coords.longitude;
-    }
-    navigator.geolocation.getCurrentPosition(success);
+    var lat, lng, coords;
     var options = {
-        center: {
-            lat: lat,
-            lng: lng
-        },
+        center: coords,
         zoom: 18
+    };
+    var markerOptions = {
+        position: coords,
+        map: $window.gmap,
+        icon: './img/navigation.png'
     };
     var notify = {
         type: 'info',
@@ -23,38 +21,51 @@ function NowCtrl($http, $scope, $window) {
     var marker;
     var infowindow;
     var activeWindow;
-    $window.gmap = new google.maps.Map(document.getElementById('map'), options);
+    var url = [];
+    var result;
 
-    function nowClick(event) {
-        // current location
-        var loc = event.latLng;
-        var markerOptions = {
-                position: loc,
-                map: $window.gmap,
-                icon: './img/navigation.png',
-                draggable: true
-            };
-        var ro = localStorage.getItem('geoHistory');
-        
 
+
+
+    function success(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        coords = new google.maps.LatLng(lat, lng); // current location
+    }
+    navigator.geolocation.getCurrentPosition(success);
+    $window.gmap = new google.maps.Map(document.querySelector('#map'), options);
+    var svc = new google.maps.places.PlacesService($window.gmap);
+    var searchOptions = {
+        location: coords,
+        radius: 1000,
+        types: ['grocery_or_supermarket', 'taxi_stand', 'food', 'car_dealer']
+    };
+    var placesServiceStatus = google.maps.places.PlacesServiceStatus.OK;
+
+    nc.allPlaces = function() {
+
+
+
+
+        // if marker defined
         if (marker !== undefined) {
-            marker.setPosition(loc);
+            marker.setPosition(coords);
         } else {
 
             marker = new google.maps.Marker(markerOptions);
         }
 
-        document.getElementById('pop').play();
-        console.log('pos:', loc.lat(), loc.lng());
-        
+        document.querySelector('#pop').play();
 
-        
-        
 
-        
 
-        lt2 = JSON.parse(ro);
-        console.log(lt2);
+
+
+
+
+
+
+
 
         // confirm
         var c = confirm("Czy chcesz wyszukać wszystkie najbliższe miejsca?");
@@ -72,54 +83,51 @@ function NowCtrl($http, $scope, $window) {
        */
             //}).then(function() {
 
-            document.getElementById('detector').play();
+            document.querySelector('#detector').play();
             $scope.$emit('notify', notify);
-
-            var svc = new google.maps.places.PlacesService($window.gmap);
-            var searchOptions = {
-                location: loc,
-                radius: 1000,
-                types: ['grocery_or_supermarket', 'taxi_stand', 'food', 'car_dealer']
-            };
-            var placesServiceStatus = google.maps.places.PlacesServiceStatus.OK;
-
-            function callback(results, status) {
-                if (status === placesServiceStatus) {
-                    var url = [];
-                    var resultsLength = results.length;
-                    $scope.res = results;
-                    $scope.loc = loc;
-
-                    for (var i = 0; i < resultsLength; i++) {
-
-                        var new_name = results[i].name.replace(/ /g, "+");
-                        url[i] = 'https://www.google.com/maps/place/' + new_name + '/@' + results[i].geometry.location.toUrlValue() + ',' + 17 + 'z/';
-                        createMarker(results[i], url[i]);
-
-                        console.log(results[i]);
-                        // createMarker(results[i], results[i].name, results[i].vicinity);
-                    }
-                    $scope.url = url;
-                    $scope.$apply();
-                }
-            }
-            
 
 
             function createMarker(place, link) {
                 var placeLoc = place.geometry.location;
                 var placeName = place.name;
-                var marker = new google.maps.Marker({
+                var placesMarkerOptions = {
                     map: $window.gmap,
                     position: placeLoc,
                     title: placeName,
                     url: link,
-                });
-                google.maps.event.addListener(marker, 'click', function() {
+                };
+                var marker = new google.maps.Marker(placesMarkerOptions);
+
+                function click() {
                     window.open(marker.url, '_blank');
-                });
+                }
+                google.maps.event.addListener(marker, 'click', click);
 
             }
+
+            function callback(results, status) {
+                if (status === placesServiceStatus) {
+                    var resultsLength = results.length;
+
+                    $scope.res = results;
+                    $scope.loc = coords;
+
+                    for (result = 0; result < resultsLength; result++) {
+
+                        var new_name = results[result].name.replace(/ /g, "+");
+                        url[result] = 'https://www.google.com/maps/place/' + new_name + '/@' + results[result].geometry.location.toUrlValue() + ',' + 17 + 'z/';
+                        createMarker(results[result], url[result]);
+
+                        console.log(results[result]);
+
+                    }
+                    $scope.url = url;
+                    $scope.$apply();
+                }
+            }
+
+
+
             svc.nearbySearch(searchOptions, callback);
 
             // });
@@ -130,9 +138,9 @@ function NowCtrl($http, $scope, $window) {
 
 
 
-    // click
-    $window.gmap.addListener('click', nowClick);
+
+
 
 }
 angular.module('nowApp')
-.controller("NowCtrl", NowCtrl);
+    .controller("NowCtrl", NowCtrl);
