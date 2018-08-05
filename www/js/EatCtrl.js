@@ -79,6 +79,7 @@ function EatCtrl($http, $scope, $window) {
                 radius: 1000,
                 types: ['bar']
             };
+
             function callback(results, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     console.log('length', results.length);
@@ -115,13 +116,13 @@ function EatCtrl($http, $scope, $window) {
                     title: placeName,
                     url: link,
                 });
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(marker, 'click', function () {
                     window.open(marker.url, '_blank');
                 });
 
             }
 
-            
+
         } else {
             return;
         }
@@ -131,4 +132,4 @@ function EatCtrl($http, $scope, $window) {
 
 }
 angular.module('nowApp')
-.controller("EatCtrl", EatCtrl);
+    .controller("EatCtrl", EatCtrl);

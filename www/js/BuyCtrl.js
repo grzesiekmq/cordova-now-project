@@ -10,6 +10,7 @@ function BuyCtrl($http, $window, $scope) {
     var infowindow;
 
     var activeWindow;
+
     function buyClick(event) {
         // current location
         var loc = event.latLng;
@@ -30,11 +31,11 @@ function BuyCtrl($http, $window, $scope) {
 
         console.log('pos:', loc.lat(), loc.lng());
 
-        
+
 
         var ro = localStorage.getItem('geoHistory');
         lt2 = JSON.parse(ro);
-        
+
         var c = confirm("Czy chcesz wyszukać wszystkie najbliższe miejsca?");
         if (c) {
             /* swal({
@@ -62,10 +63,10 @@ function BuyCtrl($http, $window, $scope) {
             function callback(results, status) {
                 var placesServiceStatus = google.maps.places.PlacesServiceStatus.OK;
                 if (status === placesServiceStatus) {
-                    
 
-                    
-                    
+
+
+
 
                     $scope.res = results;
 
@@ -73,18 +74,18 @@ function BuyCtrl($http, $window, $scope) {
 
                     for (var i = 0; i < results.length; i++) {
 
-                        
+
                         var new_name = results[i].name.replace(/ /g, "+");
                         url[i] = 'https://www.google.com/maps/place/' + new_name + '/@' + results[i].geometry.location.toUrlValue() + ',' + 17 + 'z/';
                         createMarker(results[i], url[i]);
 
-                        
+
 
                     }
                     $scope.loc = loc;
                     $scope.url = url;
                     $scope.$apply();
-                    
+
 
                 }
             }
@@ -98,14 +99,14 @@ function BuyCtrl($http, $window, $scope) {
                     title: placeName,
                     url: link,
                 });
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(marker, 'click', function () {
                     window.open(marker.url, '_blank');
                 });
 
             }
 
             svc.nearbySearch(searchOptions, callback);
-            
+
 
         } else {
             return;
@@ -127,4 +128,4 @@ function BuyCtrl($http, $window, $scope) {
 
 }
 angular.module('nowApp')
-.controller("BuyCtrl", BuyCtrl);
+    .controller("BuyCtrl", BuyCtrl);

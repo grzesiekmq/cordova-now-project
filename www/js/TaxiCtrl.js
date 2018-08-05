@@ -116,7 +116,7 @@ function TaxiCtrl($http, $scope, $window, $rootScope) {
                     title: placeName,
                     url: link,
                 });
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(marker, 'click', function () {
                     window.open(marker.url, '_blank');
                 });
 
@@ -141,4 +141,4 @@ function TaxiCtrl($http, $scope, $window, $rootScope) {
 
 }
 angular.module('nowApp')
-.controller("TaxiCtrl", TaxiCtrl);
+    .controller("TaxiCtrl", TaxiCtrl);
